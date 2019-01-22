@@ -24,7 +24,48 @@
             var str1 = document.getElementById("first_name").value;
             var str2 = document.getElementById("last_name").value;
             var res = str1.concat(" " + str2); //adding space between 2 user inputs
-            document.getElementById("fullname").innerHTML = "Full Name : " + str1;
+            document.getElementById("fullname").innerHTML = "Full Name : " + res;
+
+            var dobString = document.getElementById("birth_date").value;
+            var calculatedValue = calculate_age(dobString);
+            // console.log('calculatedValue',calculatedValue);
+        }
+
+        function calculate_age(dobString) {
+            var diff_ms = Date.now() - Date.parse(dobString);
+
+            var yearString = "";
+            var monthString = "";
+            var dayString = "";
+
+            var yearValue = Math.floor(diff_ms / 31536000000);
+            console.log("Years ", yearValue);
+            var monthValue = Math.floor((diff_ms % 31536000000) / 2592000000);
+            console.log("Months ", monthValue);
+            var dayValue = Math.floor(((diff_ms % 31536000000) % 2592000000) / 86400000);
+            console.log("Days ", dayValue);
+            // var calculatedValue = yearValue + " years " + monthValue + " months " + dayValue + " days"; // calculate and execute age
+
+            if (yearValue > 1) yearString = " years";
+            else yearString = " year";
+            if (monthValue > 1) monthString = " months";
+            else monthString = " month";
+            if (dayValue > 1) dayString = " days";
+            else dayString = " day";
+
+            if ((yearValue > 0) && (monthValue > 0) && (dayValue > 0))
+                var calculatedValue = yearValue + yearString + " " + monthValue + monthString + " " + dayValue + dayString + " ";
+            else if ((yearValue > 0) && (monthValue > 0) && (dayValue == 0))
+                var calculatedValue = yearValue + yearString + " " + monthValue + monthString + " ";
+            else if ((yearValue > 0) && (monthValue == 0) && (dayValue > 0))
+                var calculatedValue = yearValue + yearString + " " + dayValue + dayString + " ";
+            else if ((yearValue == 0) && (monthValue > 0) && (dayValue > 0))
+                var calculatedValue = monthValue + monthString + " " + dayValue + dayString + " ";
+            else if ((yearValue == 0) && (monthValue == 0) && (dayValue > 0))
+                var calculatedValue = dayValue + dayString + " ";
+
+            document.getElementById("age").innerHTML = "Age : " + calculatedValue;
+
         }
 
     </script>
