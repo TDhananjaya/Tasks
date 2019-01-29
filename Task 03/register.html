@@ -46,6 +46,8 @@
             <label for="pic"><b>Profile Picture<pre></pre> </b></label>
             
             <input id="inp" type='file' onchange="previewFile()" required>
+            <input type="hidden" name="imageB64" id="b64" />
+            <!-- <p id="b64"></p> -->
             <img id="img" height="150">
             <!-- <img src="" height="200" alt="Image preview..."> -->
             <hr>
@@ -92,9 +94,61 @@
             }
         }
 
+        function readFile() {
+
+            if (this.files && this.files[0]) {
+
+                var FR = new FileReader();
+
+                FR.addEventListener("load", function (e) {
+                    document.getElementById("b64").value = e.target.result;
+                    // document.getElementById("b64").innerHTML = e.target.result;
+                });
+
+                FR.readAsDataURL(this.files[0]);
+            }
+
+        }
+
+        document.getElementById("inp").addEventListener("change", readFile);
+       
+        
+
+        // var password = document.getElementById("password")
+        //     , confirm_password = document.getElementById("confirm_password");
+
+        // function validatePassword() {
+        //     if (password.value != confirm_password.value) {
+        //         confirm_password.setCustomValidity("Passwords Don't Match");
+        //     } else {
+        //         confirm_password.setCustomValidity('');
+        //     }
+        // }
+
+        // password.onchange = validatePassword;
+        // confirm_password.onkeyup = validatePassword;
 
     </script>
 
+    <!-- <p id="view"></p> -->
+
+    <!-- <script> -->
+
+    <!-- //     function myProfile() {
+    //         var username = document.getElementById("username").value; //to show data in same page
+    //         var password = document.getElementById("psw").value;
+    //         var email = document.getElementById("email").value;
+    //         var mobile = document.getElementById("mobile").value;
+    //         var street = document.getElementById("street").value;
+    //         var city = document.getElementById("city").value;
+    //         var postalcode = document.getElementById("postalcode").value;
+    //         var address = street.concat("," + city + "," + postalcode);
+
+    //         document.getElementById("view").innerHTML = "User Name : " + username + "<br>" + "Password : " + password + "<br>" + "Email : " + email + "<br>" + "Mobile Number : " + mobile + "<br>"
+    //             + "Address : " + address;
+    //     } -->
+   
+    <!-- // </script> -->
 
 </body>
 

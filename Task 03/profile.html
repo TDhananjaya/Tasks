@@ -73,7 +73,11 @@
         return result;
       }
 
-    
+      let image = getQueryString()["imageB64"];
+      console.log("q");
+      document.getElementById("b64").setAttribute('src', image);// set src 
+      console.log("image", image);
+
 
 
 
