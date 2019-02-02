@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Profile Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="profile.css" />
+
+</head>
+
+<body>
+
+  <div class="profile">
+
+    <form action="register.html" method="POST">
+
+      <div class="profilecontainer"><br>
+        <img id="b64" src="" alt="Avatar" class="avatar"><br>
+        <!-- one id in one time in a page -->
+        
+
+        <label for="fullname"><b>
+            <p id="fullname"></p>
+          </b></label><br>
+        <hr>
+        <label for="username"><b>
+            <p id="username"></p>
+          </b></label>
+        <hr>
+        <label for="password"><b>
+            <p id="password"></p>
+          </b></label>
+        <hr>
+        <label for="email"><b>
+            <p id="email"></p>
+          </b></label>
+        <hr>
+        <label for="mobile"><b>
+            <p id="mobile"></p>
+          </b></label>
+        <hr>
+        <label for="address"><b>
+            <p id="address"></p>
+          </b></label>
+        <hr>
+        
+            <!-- <img src="data:image/jpg;base64," alt="image"> -->
+            <!-- <img id="b64" src="" alt="image"> -->
+         
+      </div>
+    </form>
+
+    <p id="fullname"></p>
+    <p id="username"></p>
+    <p id="password"></p>
+    <p id="email"></p>
+    <p id="mobile"></p>
+    <p id="address"></p>
+
+    <script>
+      // var username = document.getElementById("username").value;
+      // var queryString = "User Name : " + username;
+      // window.location.href = "profile.html" + queryString;
+      function getQueryString() {
+        var result = {}, queryString = location.search.slice(1),
+          re = /([^&=]+)=([^&]*)/g, m;
+
+        while (m = re.exec(queryString)) {
+          result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        }
+        return result;
+      }
+
+      let image = getQueryString()["imageB64"];
+      console.log("q");
+      document.getElementById("b64").setAttribute('src', image);// set src 
+      console.log("image", image);
+
+
+
+
+
+
+      let fullname = getQueryString()["fullname"];
+      document.getElementById("fullname").innerHTML = fullname;
+      let username = getQueryString()["username"];
+      document.getElementById("username").innerHTML = "User Name : " + username;
+      let password = getQueryString()["password"];
+      document.getElementById("password").innerHTML = "Password : " + password;
+      let email = getQueryString()["email"];
+      document.getElementById("email").innerHTML = "Email : " + email;
+      let mobile = getQueryString()["mobile"];
+      document.getElementById("mobile").innerHTML = "Mobile Number : " + mobile;
+
+      let street = getQueryString()["street"];
+      let city = getQueryString()["city"];
+      let postalcode = getQueryString()["postalcode"];
+
+      let address = street.concat(", " + city + ", " + postalcode);
+      document.getElementById("address").innerHTML = "Address : " + address;
+
+
+      // function myProfile() {
+      //   var username = document.getElementById("username").value;
+
+      //   document.getElementById("view").innerHTML = "User Name : " + username;
+
+      // }
+    </script>
+  </div>
+
+</body>
+
+</html>

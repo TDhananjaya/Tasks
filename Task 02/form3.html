@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Person Details</title>
+    <script src="../2/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body>
+    <form>
+        First Name: <input type="text" name="firstname" id=first_name>
+        <br><br>
+        Last Name: <input type="text" name="lastname" id="last_name">
+        <br><br>
+        Birthday: <input type="date" name="bday" id="birth_date">
+        <br><br>
+    </form>
+    <button onclick="myFunction()">Show</button>
+
+    <p id="fullname"> </p>
+    <p id="age"> </p>
+    <script>
+
+        function myFunction() {
+            var str1 = $("#first_name").val();
+            var str2 = $("#last_name").val();
+            var res = str1.concat(" " + str2); //adding space between 2 user inputs
+            $("#fullname").text("Full Name : " + res);
+
+            var dobString = $("#birth_date").val();
+            var calculatedValue = calculate_age(dobString);
+        }
+
+        function calculate_age(dobString) {
+            var diff_ms = Date.now() - Date.parse(dobString);
+
+            var yearString = "";
+            var monthString = "";
+            var dayString = "";
+
+            var yearValue = Math.floor(diff_ms / 31536000000);
+            console.log("Years ", yearValue);
+            var monthValue = Math.floor((diff_ms % 31536000000) / 2592000000);
+            console.log("Months ", monthValue);
+            var dayValue = Math.floor(((diff_ms % 31536000000) % 2592000000) / 86400000);
+            console.log("Days ", dayValue);
+            // var calculatedValue = yearValue + " years " + monthValue + " months " + dayValue + " days"; // calculate and execute age
+
+            if (yearValue > 1) yearString = " years";
+            else yearString = " year";
+            if (monthValue > 1) monthString = " months";
+            else monthString = " month";
+            if (dayValue > 1) dayString = " days";
+            else dayString = " day";
+
+            if ((yearValue > 0) && (monthValue > 0) && (dayValue > 0))
+                var calculatedValue = yearValue + yearString + " " + monthValue + monthString + " " + dayValue + dayString + " ";
+            else if ((yearValue > 0) && (monthValue > 0) && (dayValue == 0))
+                var calculatedValue = yearValue + yearString + " " + monthValue + monthString + " ";
+            else if ((yearValue > 0) && (monthValue == 0) && (dayValue > 0))
+                var calculatedValue = yearValue + yearString + " " + dayValue + dayString + " ";
+            else if ((yearValue == 0) && (monthValue > 0) && (dayValue > 0))
+                var calculatedValue = monthValue + monthString + " " + dayValue + dayString + " ";
+            else if ((yearValue == 0) && (monthValue == 0) && (dayValue > 0))
+                var calculatedValue = dayValue + dayString + " ";
+
+            $("#age").text("Age : " + calculatedValue);
+
+        }
+    </script>
+</body>
+
+</html>
