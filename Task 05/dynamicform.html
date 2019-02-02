@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="dynamicform.css" />
+</head>
+
+<body>
+    <div class="subjectcontainer">
+        <!-- <form> -->
+        <h3>Insert Your Form Fields</h3>
+        <hr>
+
+        <input type="text" name="Fields" id="Fields" required>
+        <input type="submit" value='Add Fields' class="addsubjectbtn" onclick="addElement()" required>
+        <hr>
+        <!-- </form> -->
+        <form action="details.html" method="GET" class="dynamicFormContainer">
+            <div id="newField"></div>
+            <div id="button"></div>
+        </form>
+
+    </div>
+
+    <script>
+        var data = []; // creating array
+
+        function addElement() {
+            data.push(document.getElementById('Fields').value); // adding element to array
+            display(); // displaying the array elements
+        }
+
+        function display() {
+            lableValue = document.getElementById('Fields').value;
+
+            if (lableValue == "submit") {
+                // var node = document.createElement("ul");
+                // var btn = document.createElement("button");
+                // btn.setAttribute('type', 'text');
+                var btn = document.createElement("input");
+                btn.setAttribute('type', 'submit');
+                // btn.setAttribute('onclick','setName()');
+
+                // btn.innerHTML = lableValue;
+
+                btn.style.color = "white";
+                btn.style.padding = "16px 20px";
+                btn.style.backgroundColor = "#4CAF50";
+                btn.style.margin = "5px 0 22px 0";
+                btn.style.cursor = "pointer";
+                btn.style.width = "100%";
+                btn.style.opacity = "0.9";
+
+                // document.body.appendChild(btn);
+                // node.appendChild(btn);
+                document.getElementById("button").appendChild(btn);
+
+            } else {
+                var node = document.createElement("ul");
+                var label = document.createTextNode(lableValue);
+                // label.appendChild(text);
+                // lable.setAttribute("value",lableValue);
+                var field = document.createElement("input");
+                field.setAttribute('name', lableValue);
+                // field.setAttribute('id','newname');
+
+                field.style.padding = "15px";
+                field.style.width = "100%";
+                field.style.margin = "5px 0 22px 0";
+                field.style.display = "inline-block";
+                field.style.border = "none";
+                field.style.background = "#f1f1f1";
+
+                node.appendChild(label);
+                node.appendChild(field);
+                document.getElementById("newField").appendChild(node);
+            }
+
+        }
+        // function setName() {
+        //     for (i; i < array.length; i++) {
+        //         var str = document.getElementsByName("name").value();
+        //         str = str.replace(/\s+/g, '');
+        //         var res = str.toLowerCase();
+
+        //     }
+        // }
+
+    </script>
+
+</body>
+
+</html>
