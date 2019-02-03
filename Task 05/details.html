@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Details</title>
+</head>
+
+<body>
+  Entered Details
+  <hr>
+  <div class="profile">
+
+    <form action="dynamicform.html" method="POST">
+
+      <p id="view"></p>
+  
+      <hr>
+
+  </div>
+  </form>
+  <!-- <p id="Fields"></p> -->
+  <script>
+    function getQueryString() {
+      var result = {}, queryString = location.search.slice(1),
+        re = /([^&=]+)=([^&]*)/g, m;
+
+      while (m = re.exec(queryString)) {
+        result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+      }
+
+      return result;
+      console.log(result);
+
+    }
+
+    // let object1 = getQueryString(); //create object
+    // console.log(getQueryString());
+    // var lable1 = Object.keys(object1)[0];
+    // var value1 = getQueryString()[lable1];
+    // document.getElementById("view").innerHTML = lable1 + " : " + value1;
+
+    // var lable1 = Object.keys(object1)[1];
+    // var value1 = getQueryString()[lable1];
+    // document.getElementById("view2").innerHTML = lable1 + " : " + value1;
+
+    const object = getQueryString();
+    const propertyArray = Object.keys(object);
+    // console.log(propertyArray);
+    // const valueArray = Object.values(object);
+    // console.log(valueArray);
+
+
+    propertyArray.forEach(function (key, val) {
+
+      var lable = propertyArray[val] + "  ";
+      var values = object[key] + "  ";
+      var mybr = document.createElement('br');
+      
+      var result = lable + " : " + values + "  ";
+      
+      document.getElementById("view").append(result);
+      document.getElementById("view").append(mybr);
+    });
+
+// Object.keys(object).forEach(function(key) {
+
+
+// console.log(key, object[key]);
+
+// });
+
+  </script>
+</body>
+
+</html>
