@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Person Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="registerJQ.css" />
+</head>
+
+<body>
+    <form action="profileJQ.html" method="GET">
+        <div class="container">
+            <h1>Register</h1>
+            <p>Please fill in this form to Register.</p>
+            <hr>
+
+            <label for="fullname"><b>Full Name</b></label>
+            <input type="text" placeholder="Enter Full Name" name="fullname" id="fullname" required>
+
+            <label for="username"><b>User Name</b></label>
+            <input type="text" placeholder="Enter username" name="username" id="username" minlength="6" required>
+
+            <label for="password"><b>Password</b>
+                <input type="password" placeholder="Enter Password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    onkeyup='check();' minlength="8" required></label>
+
+            <label for="confirm_password"><b>Confirm Password </b><span id='message'></span>
+                <input type="password" placeholder="Confirm Password" name="confirm_password" onkeyup='check();' id="confirm_password"
+                    minlength="8" required></label>
+
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                required>
+
+            <label for="mobile"><b>Mobile Number</b></label>
+            <input type="text" placeholder="Enter mobile number" name="mobile" id="mobile" maxlength="10" required>
+
+            <label for="address"><b>Address</b></label>
+            <input type="text" placeholder="Enter your street" name="street" id="street" required>
+            <input type="text" placeholder="Enter your city" name="city" id="city" required>
+            <input type="text" placeholder="Enter your postalcode" name="postalcode" id="postalcode" required>
+
+            <label for="pic"><b>Profile Picture
+                    <pre></pre> </b></label>
+
+            <input id="inputFile" type='file' required>
+            <input type="text" name="imageB64" id="base64" />
+            <!-- <p id="b64"></p> -->
+            <img id="image_upload_preview" height="150">
+            <!-- <img src="" height="200" alt="Image preview..."> -->
+            <hr>
+            <input type="submit" value="Submit" class="registerbtn" />
+        </div>
+    </form>
+
+    <script>
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image_upload_preview').attr('src', e.target.result);
+                    $('#base64').val(e.target.result); // convert base64
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#inputFile").change(function () {
+            readURL(this);
+        });
+
+
+        function check(input) {
+            if ($("#password").val() == $("#confirm_password").val()) {
+                $("#message").style.color = "green";
+                $("#message").text("matching");
+
+            } else {
+                $("#message").style.color = "red";
+                $("#message").text("not matching");
+                $("#submit").disabled = true;
+            }
+        }
+
+        var checksubmit = function () {
+            if (check() = false) {
+                $("#submit").disabled = true;
+            } else {
+                $("#submit").disabled = false;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
